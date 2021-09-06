@@ -1,0 +1,247 @@
+<html>
+<head>
+  <title>Invoice Generator</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
+
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="https://www.holden.se/api/call.js"></script>
+
+
+</head>
+<body>
+<div class="container">
+  <div class="row clearfix">
+    <div class="col" style="border-radius: 4px; background-color: rgba(0,0,0,0.05); box-sizing: border-box; padding: 10px; margin-top: 10px;">
+      <h1>Invoice</h1>
+      
+    </div>
+
+    <div class="col-md-12">
+      <form id="form" method="GET" target="_blank" action="https://www.holden.se/api/faktura/index.php">
+
+        <div class="row">
+          <div class="col">
+           <!----- <h3>Faktura</h3>--->
+            <hr>
+          </div>
+
+          <div class="col-md-4">
+            <label> Invoice Number</label>
+            <input type="text" name="invoice number" class="form-control">
+          </div>
+          <div class="col-md-4">
+            <label>Billing Date</label>
+            <input type="text" name="Billing Date" class="form-control">
+          </div>
+          <div class="col-md-4">
+            <label>Due Date</label>
+            <input type="text" name="Due Date" class="form-control">
+
+          </div>
+        </div>
+
+
+        <div class="row">
+          <div class="col">
+            <h3>Receiver</h3>
+            <hr>
+          </div>
+
+          <div class="col-md-6">
+            <label>First Name</label>
+            <input type="text" name="tperson" class="form-control">
+          </div>
+          <div class="col-md-6">
+            <label>Last Name (Optional)</label>
+            <input type="text" name="torgnummer" class="form-control">
+          </div>
+        </div>
+        <div class="row"><br>
+          <div class="col-md-3">
+            <label>Address</label>
+            <input type="text" name="ADdress" class="form-control">
+          </div>
+
+          <div class="col-md-3">
+            <label>City</label>
+            <input type="text" name="City" class="form-control">
+          </div>
+
+          <div class="col-md-3">
+            <label>State</label>
+            <input type="text" name="State" class="form-control">
+          </div>
+
+          <div class="col-md-3">
+            <label>Country</label>
+            <input type="text" name="country" class="form-control">
+          </div>
+
+          <div class="col-md-3">
+            <label>Pin Code</label>
+            <input type="text" name="Pin Code" class="form-control">
+          </div>
+
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <h3>Sender</h3>
+            <hr>
+          </div>
+
+          <div class="col-md-6">
+            <label>First Name</label>
+            <input type="text" name="fperson" class="form-control">
+          </div>
+          <div class="col-md-6">
+            <label>Last Name (optonal)</label>
+            <input type="text" name="forgnummer" class="form-control">
+          </div>
+        </div>
+        <div class="row"><br>
+          <div class="col-md-3">
+            <label>Address</label>
+            <input type="text" name="Address" class="form-control">
+          </div>
+
+          <div class="col-md-3">
+            <label>City</label>
+            <input type="text" name="City" class="form-control">
+          </div>
+
+          <div class="col-md-3">
+            
+            <form>
+              <label for="state">State</label>
+              <select id="state" name="state">
+                <option value="none" selected>Select…</option>
+            <option value="Andhra Pradesh">Andhra Pradesh</option>
+            <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+            <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+            <option value="Assam">Assam</option>
+            <option value="Bihar">Bihar</option>
+            <option value="Chandigarh">Chandigarh</option>
+            <option value="Chhattisgarh">Chhattisgarh</option>
+            <option value="Dadar and Nagar Haveli">Dadar and Nagar Haveli</option>
+            <option value="Daman and Diu">Daman and Diu</option>
+            <option value="Delhi">Delhi</option>
+            <option value="Lakshadweep">Lakshadweep</option>
+            <option value="Puducherry">Puducherry</option>
+            <option value="Goa">Goa</option>
+            <option value="Gujarat">Gujarat</option>
+            </select>
+            </form>
+          </div>
+         
+          
+
+          <div class="col-md-3">
+            <label>Pin code</label>
+            <input type="text" name="Pin Code" class="form-control">
+          </div>
+
+          <div class="col-md-3">
+            <label>Country</label>
+            <input type="text" name="Country" class="form-control">
+          </div>
+
+        </div>
+
+        <div class="row">
+
+          <div class="col">
+            <h3>Information</h3><hr>
+          </div>
+
+          <div class="col">
+            <label>Status: (Example: Not Paid, Paid, Delayed)</label>
+            <input type="text" name="status" class="form-control">
+            <br>
+          </div>
+
+          <div class="col">
+            <label>Information & Conditions</label>
+            <textarea name="villkor" rows="5" class="form-control"></textarea>
+          </div>
+        </div>
+<hr>
+      <table class="table table-bordered table-hover" id="tab_logic">
+        <thead>
+          <tr>
+            <th class="text-center"> # </th>
+            <th class="text-center"> Product </th>
+            <th class="text-center"> Qunatity </th>
+            <th class="text-center"> Price </th>
+            <th class="text-center"> Discount </th>
+            <th class="text-center"> In total </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr id='addr0'>
+            <td>1</td>
+            <td><input type="text" name='product[]'  placeholder='Write Product Name' class="form-control"/></td>
+            <td><input type="number" name='qty[]' placeholder='Enter Number' class="form-control qty" step="0" min="0"/></td>
+            <td><input type="number" name='startavgift[]' placeholder='Enter Price' class="form-control startavgift" step="0" min="0"/></td>
+            <td><input type="number" name='price[]' placeholder='Enter discount' class="form-control price" step="0.00" min="0"/></td>
+            <td><input type="number" name='total[]' placeholder='0.00' class="form-control total" readonly/></td>
+          </tr>
+          <tr id='addr1'></tr>
+        </tbody>
+      </table>
+    </div>
+</div>
+  <div class="row clearfix">
+    <div class="col-md-12">
+      <button id="add_row" type=button class="btn btn-default pull-left"> add_row</button>
+      <button id='delete_row' type=button class="pull-right btn btn-default">delete_row</button>
+
+      
+
+
+    </div>
+  </div>
+  <div class="row clearfix" style="margin-top:20px">
+    <div class="pull-right col-md-4">
+      <table class="table table-bordered table-hover" id="tab_logic_total">
+        <tbody>
+          <tr>
+            <th class="text-center">Total excluding VAT</th>
+            <td class="text-center"><input type="number" name='sub_total' placeholder='0.00' class="form-control" id="sub_total" readonly/></td>
+          </tr>
+          <tr>
+            <th class="text-center">VAT rate</th>
+            <td class="text-center"><div class="input-group mb-2 mb-sm-0">
+                <input type="number" class="form-control" id="tax" name="tax_procent" placeholder="0">
+                <div class="input-group-addon">%</div>
+              </div></td>
+          </tr>
+          <tr>
+            <th class="text-center">VAT</th>
+            <td class="text-center"><input type="number" name='tax_amount' id="tax_amount" placeholder='0.00' class="form-control" readonly/></td>
+          </tr>
+          <tr>
+            <th class="text-center">In total</th>
+            <td class="text-center"><input type="number" name='total_amount' id="total_amount" placeholder='0.00' class="form-control" readonly/></td>
+          </tr>
+        </tbody>
+      </table>
+      <input type="submit" id="submit" class="btn btn-success pull-right col-md-12" value="Create Invoice">
+    </form>
+    </div>
+  </div>
+</div>
+
+<div class="col" style="border-radius: 4px; background-color: rgba(0,0,0,0.05); box-sizing: border-box; padding: 10px; margin-top: 10px;">
+ 
+</div>
+
+
+
+  </div>
+</footer>
+</body>
+</html>
